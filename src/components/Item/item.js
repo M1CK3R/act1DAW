@@ -24,6 +24,7 @@ function Item({nombre, descripcion, fecha}) {
         <Card.Text>
             {fecha}
         </Card.Text>
+        <Button variant='primary'>Editar</Button>
         <Button variant="primary">Terminar</Button>
       </Card.Body>
     </Card>

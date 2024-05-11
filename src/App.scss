@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.overlapping-div{
+  position: absolute;
+  z-index: 100;
+  text-align: left;
+}
+
+.scrolling{
+  max-height: 1200px;
+  overflow-y: auto;
+}
