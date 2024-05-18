@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function Item(props) {
   const dispatch = useDispatch();
-  const value = useSelector(state => state.goals.value);
   
   const deleteItemFun = (id) => {
     console.log(id)
