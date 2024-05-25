@@ -1,31 +1,40 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import './item.scss';
+import { deleteGoal } from '../../reducers/goalsSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
-function Item({nombre, descripcion, fecha}) {
+function Item(props) {
+  const dispatch = useDispatch();
+  
+  const deleteItemFun = (id) => {
+    console.log(id)
+    dispatch(deleteGoal(id))
+  }
+
   return (
+    
     <Card style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Text className='fw-bold'>
             Name
         </Card.Text>
         <Card.Text>
-            {nombre}
+            {props.nombre}
         </Card.Text>
         <Card.Text className='fw-bold'>
           Description
         </Card.Text>
         <Card.Text>
-            {descripcion}
+            {props.descripcion}
         </Card.Text>
         <Card.Text className='fw-bold'>
           Due date
         </Card.Text>
         <Card.Text>
-            {fecha}
+            {props.fecha}
         </Card.Text>
-        <Button variant='primary'>Editar</Button>
-        <Button variant="primary">Terminar</Button>
+        <Button variant="primary" onClick={() => deleteItemFun(props.id)}>Terminar</Button>
       </Card.Body>
     </Card>
   );
