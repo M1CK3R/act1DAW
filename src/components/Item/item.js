@@ -2,14 +2,21 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import './item.scss';
 import { deleteGoal } from '../../reducers/goalsSlice';
+import { deleteTask } from '../../reducers/tasksSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 function Item(props) {
+
+  const option = useSelector((state) => state.option.value);
   const dispatch = useDispatch();
   
-  const deleteItemFun = (id) => {
-    console.log(id)
-    dispatch(deleteGoal(id))
+  const deleteItemFun = (option, id) => {
+    console.log(option)
+    if(option==='tasks'){
+      dispatch(deleteTask(id))
+    } else if (option === 'goals') {
+      dispatch(deleteGoal(id))
+    }
   }
 
   return (
@@ -34,7 +41,7 @@ function Item(props) {
         <Card.Text>
             {props.fecha}
         </Card.Text>
-        <Button variant="primary" onClick={() => deleteItemFun(props.id)}>Terminar</Button>
+        <Button variant="primary" onClick={() => deleteItemFun(option, props.id)}>Terminar</Button>
       </Card.Body>
     </Card>
   );

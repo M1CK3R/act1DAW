@@ -10,9 +10,22 @@ import { useSelector } from 'react-redux';
 
 
 function App() {
-  const goals = useSelector((state) => {
-    return state.goals.value
-  });
+  const goals = useSelector((state) => state.goals.value);
+  const option = useSelector((state) => state.option.value);
+  const tasks = useSelector((state) => state.tasks.value);
+  
+
+  const listaItems = () => {
+    if(option === 'goals') {
+      return goals.map((goal, index) => (
+        <Item key={index} nombre={goal.nombre} descripcion={goal.descripcion} fecha={goal.fecha} id={goal.id} />
+      ))
+    } else if (option === 'tasks') {
+      return tasks.map((task, index) => (
+        <Item key={index} nombre={task.nombre} descripcion={task.descripcion} fecha={task.fecha} id={task.id} />
+      ))
+    }
+  }
 
   return (
     <div className='App'>
@@ -28,9 +41,8 @@ function App() {
           </Row>
           <Row>
             <div className='scrolling'>
-              {goals.map((goal) => {
-                return <Item key={goal.id} nombre={goal.nombre} descripcion={goal.descripcion} fecha={goal.fecha} id={goal.id} />
-              })}
+              {listaItems()}
+
             </div>
           </Row>
         </Col>

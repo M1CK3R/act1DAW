@@ -3,15 +3,15 @@ import { createSlice } from '@reduxjs/toolkit'
 export const optionSlice = createSlice({
     name:'option',
     initialState: {
-        value: 'tasks'
+        value: 'goals'
     },
     reducers:{
-        changeOption: (state, action) => {
+        setOption: (state, action) => {
             state.value = action.payload;
         }
     }
 })
 
-export const {changeOption} = optionSlice.actions;
+export const { setOption } = optionSlice.actions;
 
 export default optionSlice.reducer;

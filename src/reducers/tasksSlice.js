@@ -1,12 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-// s%.%0Qee
-
-export const goalsSlice = createSlice({
-    name:'goals',
+export const tasksSlice = createSlice({
+    name:'tasks',
     initialState: {
         value: [{
-            'nombre': 'Metas',
+            'nombre': 'Tareas',
             'descripcion': 'Galileo',
             'fecha': '08/12/2024',
             'id': 1
@@ -14,9 +12,10 @@ export const goalsSlice = createSlice({
         ]
     },
     reducers:{
-        addGoal: (state, action) => {
+        addTask: (state, action) => {
+            console.log(action)
             state.value.push(action.payload);
-            fetch("http://localhost:3001/goals/addGoals",{
+            fetch("http://localhost:3001/tasks/addTasks",{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json",
@@ -27,8 +26,8 @@ export const goalsSlice = createSlice({
                 console.log(err);
             })
         },
-        deleteGoal: (state, action) => {
-            fetch(`http://localhost:3001/goals/removeGoals/${action.payload}`,{
+        deleteTask: (state, action) => {
+            fetch(`http://localhost:3001/tasks/removeTasks/${action.payload}`,{
                 method:"DELETE",
                 headers:{
                     "Content-Type":"application/json",
@@ -37,28 +36,28 @@ export const goalsSlice = createSlice({
             }).catch((err)=>{
                 console.log(err);
             })
-            state.value = state.value.filter((goal) => goal.id !== action.payload);
+            state.value = state.value.filter((task) => task.id !== action.payload);
         },
-        setGoals: (state, action) => {
+        setTasks: (state, action) => {
             state.value = action.payload;
         }
     }
 })
 
-export const {addGoal, deleteGoal, setGoals} = goalsSlice.actions;
+export const {addTask, deleteTask, setTasks} = tasksSlice.actions;
 
-export const addGoalAsync = (goal) => (dispatch) => {
-    fetch("http://localhost:3001/goals/addGoals",{
+export const addTaskAsync = (task) => (dispatch) => {
+    fetch("http://localhost:3001/tasks/addTasks",{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json",
                     "Authorization":"dawtds"
                 },
-                body:JSON.stringify(goal)
+                body:JSON.stringify(task)
             })
             .then(response => response.json())
             .then(data => {
-                dispatch(setGoals([...data]));
+                dispatch(setTasks([...data]));
             })
             .catch((err)=>{
                 console.log(err);
@@ -67,4 +66,4 @@ export const addGoalAsync = (goal) => (dispatch) => {
 
 
 
-export default goalsSlice.reducer;
+export default tasksSlice.reducer;

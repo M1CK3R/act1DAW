@@ -2,8 +2,10 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './form.scss';
 import { useDispatch } from 'react-redux';
-import { addGoal } from '../../reducers/goalsSlice';
+import { addTaskAsync } from '../../reducers/tasksSlice';
+import { addGoalAsync } from '../../reducers/goalsSlice';
 import { useRef } from 'react';
+import { useSelector } from 'react-redux';
 
 function Formulario() {
 
@@ -11,11 +13,17 @@ function Formulario() {
   const inputRefDesc = useRef();
   const inputRefFecha = useRef();
 
+  const option = useSelector((state) => state.option.value);
   const dispatch = useDispatch();
 
   const addItem = (e) => {
     e.preventDefault();
-    dispatch(addGoal({'nombre':inputRefNombre.current.value, 'descripcion':inputRefDesc.current.value, 'fecha':inputRefFecha.current.value}));
+    if(option === 'goals'){
+      dispatch(addGoalAsync({'nombre':inputRefNombre.current.value, 'descripcion':inputRefDesc.current.value, 'fecha':inputRefFecha.current.value}));
+    } else if (option === 'tasks') {
+      dispatch(addTaskAsync({'nombre':inputRefNombre.current.value, 'descripcion':inputRefDesc.current.value, 'fecha':inputRefFecha.current.value}))
+    }
+    
   }
 
   return (
