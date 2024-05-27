@@ -1,4 +1,4 @@
-# Actividad 6
+# Proyecto Final
 
 ## Instrucciones para correr el proyecto
 
